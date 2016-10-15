@@ -1,0 +1,105 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="./css/style.css"/>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="config/config.js"></script>
+	<script src="js/common.js"></script>
+	<title>随机点菜系统 V1.0.10150</title>
+</head>
+<body>
+	<div id="top_container" class="top_container">
+		<div id="outputs" class="outputs">
+			<ol class="rounded-list-without-number">
+				<li><a href="#">生成的菜单</a></li>
+				<div id="outputs_order_list" class="tags">
+				</div>
+			</ol>
+		</div>
+		
+		<div id="action" class="action">
+			<div id="input_area" class="input_area">
+				<span class="input input--hoshi">
+					<input id="input_person_num" class="input__field input__field--hoshi" type="text"
+						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" />
+					<label class="input__label input__label--hoshi input__label--hoshi-color" for="input_person_num">
+						<span class="input__label-content input__label-content--hoshi">吃饭人数</span>
+					</label>
+				</span>
+				<span class="input input--hoshi">
+					<input id="input_avg_cost" class="input__field input__field--hoshi" type="text"
+						onkeyup="this.value=this.value.replace(/[^\d.]/ig,'')" />
+					<label class="input__label input__label--hoshi input__label--hoshi-color" for="input_avg_cost">
+						<span class="input__label-content input__label-content--hoshi">人均最大消费(元)</span>
+					</label>
+				</span>
+			</div>
+			<div id="outputs_tips" class="outputs_tips"></div>
+			<div id="btn_area" class="btn_area">
+				<div id="btn_generate" class="btn">生成</div>
+				<div id="btn_reset" class="btn">重置</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr />	
+	
+	<div id="list_container" class="list_container">
+		<ol class="rounded-list">
+			<li><a href="#">荤菜</a></li>
+			<div id="list_content_0" class="tags">
+			</div>
+			<li><a href="#">半荤半素</a></li>
+			<div id="list_content_1" class="tags">
+			</div>
+			<li><a href="#">素菜</a></li>
+			<div id="list_content_2" class="tags">
+			</div>
+			<li><a href="#">汤</a></li>
+			<div id="list_content_3" class="tags">
+			</div>
+			<li><a href="#">必点菜</a></li>
+			<div id="list_content_mustorder" class="tags">
+			</div>
+			
+		</ol>
+	</div>
+	
+	<script>
+		(function() {
+			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+			if (!String.prototype.trim) {
+				(function() {
+					// Make sure we trim BOM and NBSP
+					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+					String.prototype.trim = function() {
+						return this.replace(rtrim, '');
+					};
+				})();
+			}
+
+			[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+				// in case the input is already filled..
+				if( inputEl.value.trim() !== '' ) {
+					classie.add( inputEl.parentNode, 'input--filled' );
+				}
+
+				// events:
+				inputEl.addEventListener( 'focus', onInputFocus );
+				inputEl.addEventListener( 'blur', onInputBlur );
+			} );
+
+			function onInputFocus( ev ) {
+				classie.add( ev.target.parentNode, 'input--filled' );
+			}
+
+			function onInputBlur( ev ) {
+				if( ev.target.value.trim() === '' ) {
+					classie.remove( ev.target.parentNode, 'input--filled' );
+				}
+			}
+		})();
+	</script>
+</body>
+</html>
