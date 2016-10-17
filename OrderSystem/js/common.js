@@ -193,7 +193,9 @@ function doGenerate(personNum, costAvg) {
 	for (var i = 0; i < $tryPickupCntMax; ++i) {
 		if ($isOrderSoup && !$isAlreadyOrderSoup) {
 			$curOrder = pickupOneOrder($orders[3], $orderOutput);
-			if (!isObjEmpty($curOrder) && $costSum + $curOrder.cost < $costMaxSum) {
+			if (!isObjEmpty($curOrder) && $costSum + $curOrder.cost < $costMaxSum
+                && $orderOutput.length - personNum  < $orderNumBetween[1]) {
+                    
 				$isAlreadyOrderSoup = true;
 				$costSum += $curOrder.cost;
 				$orderOutput.push($curOrder);
@@ -206,11 +208,17 @@ function doGenerate(personNum, costAvg) {
 				continue;
 			}
 			
-			if ($costSum + $curOrder.cost < $costMaxSum) {
+			if ($costSum + $curOrder.cost < $costMaxSum 
+                && $orderOutput.length - personNum  < $orderNumBetween[1]) {
+
 				$costSum += $curOrder.cost;
 				$orderOutput.push($curOrder);
 			}
 		}
+        
+        if ($orderOutput.length - personNum  >= $orderNumBetween[1]) {
+            break;
+        }
 	}
 	
 	if ($orderOutput.length - personNum  >= $orderNumBetween[0] 

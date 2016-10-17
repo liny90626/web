@@ -1,4 +1,4 @@
-var $orderNumBetween = [-3, 0];			// 点菜数量区间(与人数差异)
+var $orderNumBetween = [-3, 3];			// 点菜数量区间(与人数差异)
 var $isOrderSoup = 1;					// 是否要点汤
 var $perPersonCostOffset = 3;			// 人均餐具费用
 var $tryGenerateCntMax = 100;			// 最大尝试生成次数
@@ -22,12 +22,19 @@ var $orderList =
 		cost:		25,	
 		reject:		[],
 	},
+    {
+		name: 		"醋肉",
+		percent:	0,	
+		type:		0,	
+		cost:		20,	
+		reject:		[],
+	},
 	{
 		name: 		"海蛏煎蛋",
 		percent:	0,	
 		type:		0,	
 		cost:		25,	
-		reject:		["海蛎煎"],
+		reject:		["海蛎煎", "青口炒蛋", "凉拌皮蛋"],
 	},
 	{
 		name: 		"海蛎煎",
@@ -64,7 +71,7 @@ var $orderList =
 		percent:	0,	
 		type:		1,	
 		cost:		22,	
-		reject:		[],
+		reject:		["凉拌皮蛋", "海蛏煎蛋"],
 	},
 	{
 		name: 		"鱼香肉丝",
@@ -80,7 +87,7 @@ var $orderList =
 		percent:	0,				
 		type:		2,				
 		cost:		16,				
-		reject:		[],				
+		reject:		["青口炒蛋", "海蛏煎蛋"],				
 	},
 	{
 		name: 		"长豆烧茄子",
